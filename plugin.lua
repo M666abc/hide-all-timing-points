@@ -1,22 +1,16 @@
+local timingPointsHidden = false
+
 function draw()
   imgui.Begin("Hide/Show")
-  if imgui.Button("Hide Timing Points") then
-    hideTimingPoints()
-  end
-  if imgui.Button("Show Timing Points") then
-    showTimingPoints()
+  if imgui.Button(timingPointsHidden and "Show Timing Points" or "Hide Timing Points") then
+    toggleTimingPoints()
   end
   imgui.End()
 end
 
-function hideTimingPoints()
+function toggleTimingPoints()
+  timingPointsHidden = not timingPointsHidden
   for _, tp in pairs(map.TimingPoints) do
-    actions.ChangeTimingPointHidden(tp, true)
-  end
-end
-
-function showTimingPoints()
-  for _, tp in pairs(map.TimingPoints) do
-    actions.ChangeTimingPointHidden(tp, false)
+    actions.ChangeTimingPointHidden(tp, timingPointsHidden)
   end
 end
