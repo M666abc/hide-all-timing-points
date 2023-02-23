@@ -1,28 +1,22 @@
-local hiddenTPs = {}  -- Keep track of which TPs have been hidden
-
 function draw()
-  imgui.Begin("Hide")
-  if imgui.Button("Do the thing") then
+  imgui.Begin("Hide/Show")
+  if imgui.Button("Hide Timing Points") then
     hideTimingPoints()
   end
-  if imgui.Button("Undo the thing") then
-    unhideTimingPoints()
+  if imgui.Button("Show Timing Points") then
+    showTimingPoints()
   end
   imgui.End()
 end
 
 function hideTimingPoints()
   for _, tp in pairs(map.TimingPoints) do
-    if not tp.IsInherited then  -- Ignore inherited TPs
-      actions.ChangeTimingPointHidden(tp, true)
-      hiddenTPs[tp] = true
-    end
+    actions.ChangeTimingPointHidden(tp, true)
   end
 end
 
-function unhideTimingPoints()
-  for tp, _ in pairs(hiddenTPs) do
+function showTimingPoints()
+  for _, tp in pairs(map.TimingPoints) do
     actions.ChangeTimingPointHidden(tp, false)
   end
-  hiddenTPs = {}
 end
