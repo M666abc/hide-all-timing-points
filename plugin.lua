@@ -1,7 +1,7 @@
 local timingPointsHidden = false
 
 function draw()
-  imgui.Begin("Hide/Show")
+  imgui.Begin("TimingLineHider")
   if imgui.Button(timingPointsHidden and "Show Timing Points" or "Hide Timing Points") then
     toggleTimingPoints()
   end
